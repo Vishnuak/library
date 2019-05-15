@@ -55,4 +55,24 @@ class BooksManagementTest extends TestCase
         $response->assertSessionHasErrors('author');
 
     }
+
+
+    /** @test */
+    public function a_book_can_be_deleted() 
+    {
+
+        $response = $this->post('/',[
+            'title' => 'Alice in Wonderland',
+            'author' => 'Lewis Caroll',
+        ]);
+        
+        $book = Book::first();
+
+        $response = $this->delete('/' . $book->id);
+
+        $this->assertCount(0, Book::all());
+
+        $response->assertRedirect('/');
+
+    }
 }

@@ -12,6 +12,12 @@ class BooksController extends Controller
     	Book::create($this->validateRequest());
     }
 
+    public function destroy(Book $id)
+    {
+        $id->delete();
+
+        return redirect('/');
+    }
 
     protected function validateRequest()
     {

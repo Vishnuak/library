@@ -12,3 +12,4 @@
 */
 
 Route::post('/', 'BooksController@store');
+Route::delete('/{id}', 'BooksController@destroy');
