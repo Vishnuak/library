@@ -12,6 +12,15 @@ class BooksController extends Controller
     	Book::create($this->validateRequest());
     }
 
+    public function update(Book $id) 
+    {
+        $id->update(request()->validate([
+            'author' => 'required',
+        ]));
+
+        return redirect('/');
+    }
+
     public function destroy(Book $id)
     {
         $id->delete();

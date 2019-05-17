@@ -12,4 +12,5 @@
 */
 
 Route::post('/', 'BooksController@store');
+Route::patch('/{id}', 'BooksController@update');
 Route::delete('/{id}', 'BooksController@destroy');

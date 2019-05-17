@@ -16,10 +16,7 @@ class BooksManagementTest extends TestCase
 
         $this->withoutExceptionHandling();
 
-        $response = $this->post('/',[
-            'title' => 'Alice in Wonderland',
-            'author' => 'Lewis Caroll',
-        ]);
+        $response = $this->post('/',$this->data());
 
 
         $response->assertStatus(200);
@@ -61,10 +58,7 @@ class BooksManagementTest extends TestCase
     public function a_book_can_be_deleted() 
     {
 
-        $response = $this->post('/',[
-            'title' => 'Alice in Wonderland',
-            'author' => 'Lewis Caroll',
-        ]);
+        $response = $this->post('/',$this->data());
         
         $book = Book::first();
 
@@ -74,5 +68,33 @@ class BooksManagementTest extends TestCase
 
         $response->assertRedirect('/');
 
+    }
+
+    /** @test */
+
+    public function a_author_can_be_updated()
+    {
+
+        $response = $this->post('/', $this->data());
+
+        $book = Book::first();
+
+        $response = $this->patch('/' . $book->id, [
+            'author' => 'Ruskin Bond',
+        ]);
+
+        $this->assertEquals('Ruskin Bond', Book::first()->author);
+        $response->assertRedirect('/');
+
+
+    }
+
+
+    protected function data()
+    {
+        return [
+            'title' => 'Alice in Wonderland',
+            'author' => 'Lewis Caroll',
+        ];
     }
 }
