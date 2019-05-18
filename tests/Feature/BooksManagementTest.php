@@ -19,7 +19,7 @@ class BooksManagementTest extends TestCase
         $response = $this->post('/',$this->data());
 
 
-        $response->assertStatus(200);
+        $response->assertRedirect('/');
         $this->assertCount(1, Book::all());
     }
 

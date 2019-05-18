@@ -13,4 +13,10 @@
 
 Route::post('/', 'BooksController@store');
 Route::patch('/{id}', 'BooksController@update');
-Route::delete('/{id}', 'BooksController@destroy');
+Route::delete('/{id}', 'BooksController@destroy')->name('delete');
+
+Route::view('/export', 'export');
+Route::post('/export', 'BooksController@export');
+
+Route::get('/', 'BooksController@index');
+Route::get('/{id}', 'BooksController@edit');
