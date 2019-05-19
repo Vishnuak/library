@@ -90,6 +90,26 @@ class BooksManagementTest extends TestCase
     }
 
 
+    /** @test */
+
+    public function books_can_be_listed()
+    {
+        $response = $this->get('/');
+
+        $response->assertStatus(200);
+    }
+
+
+    /** @test */
+
+    public function books_can_be_exported()
+    {
+        $response = $this->get('/export');
+
+        $response->assertStatus(200);
+    }
+
+
     protected function data()
     {
         return [
